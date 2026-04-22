@@ -49,6 +49,7 @@ public class ClienteMB implements Serializable {
 
     public void edit(Client c) {
         this.client = c;
+        clientService.update(c);
     }
 
     public void delete(Client c) {

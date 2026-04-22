@@ -20,10 +20,11 @@ public class ClientEntityTest {
 		client.setNumber(100);
 		client.setCity("São Paulo");
 		client.setState("SP");
+		client.setAge(25);
 
 		Assertions.assertEquals(12345678901L, client.getCpf());
 		Assertions.assertEquals("Caio Croccia", client.getName());
-		Assertions.assertEquals("25", client.getAge());
+		Assertions.assertEquals(25, client.getAge());
 		Assertions.assertEquals(11999999999L, client.getPhone());
 		Assertions.assertEquals("Rua Teste", client.getAddress());
 		Assertions.assertEquals(100, client.getNumber());
@@ -35,7 +36,7 @@ public class ClientEntityTest {
 	public void classeClientDeveTerAnotacaoTable() {
 		Table table = Client.class.getAnnotation(Table.class);
 		Assertions.assertNotNull(table, "Client deve estar anotada com @Table");
-		Assertions.assertEquals("Cliente", table.tableName());
+		Assertions.assertEquals("Client", table.tableName());
 	}
 
 	@Test

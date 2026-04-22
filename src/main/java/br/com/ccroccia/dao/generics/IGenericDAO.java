@@ -19,7 +19,7 @@ public interface IGenericDAO <T extends Persistent, E extends Serializable> {
     public Boolean delete(E value) throws Exception;
 
 
-    public Boolean update(E value) throws KeyTypeNotFoundException, Exception;
+    public Boolean update(T entity) throws KeyTypeNotFoundException, Exception;
 
 
     public T find(E value) throws Exception;

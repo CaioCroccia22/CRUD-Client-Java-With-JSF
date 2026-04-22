@@ -1,6 +1,7 @@
 package br.com.ccroccia.service;
 
 import br.com.ccroccia.dao.IClientDao;
+import br.com.ccroccia.dao.Persistent;
 import br.com.ccroccia.domain.Client;
 import br.com.ccroccia.exceptions.KeyTypeNotFoundException;
 
@@ -42,9 +43,9 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public void update(Long cpf) {
+	public void update(Client c) {
 		try {
-			clientDao.update(cpf);			
+			clientDao.update(c);			
 		} catch(Exception e) {
 			System.out.println("Erro ao atualizar cliente");
 		}

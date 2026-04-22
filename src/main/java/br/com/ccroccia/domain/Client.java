@@ -5,7 +5,7 @@ import annotation.*;
 
 import br.com.ccroccia.dao.Persistent;
 
-@Table(tableName = "client")
+@Table(tableName = "Client")
 public class Client implements Persistent{
 
 

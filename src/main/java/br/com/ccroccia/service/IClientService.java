@@ -1,5 +1,6 @@
 package br.com.ccroccia.service;
 
+import br.com.ccroccia.dao.Persistent;
 import br.com.ccroccia.domain.Client;
 
 public interface IClientService {
@@ -10,6 +11,7 @@ public interface IClientService {
 
 	void delete(Long cpf);
 
-	void update(Long cpf);
+	void update(Client client);
+
 
 }

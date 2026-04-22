@@ -29,7 +29,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
 
     protected abstract void setParametersDelete(PreparedStatement stmDelete, E value) throws SQLException ;
 
-    protected abstract void setParametersUpdate(PreparedStatement stmUpdate, E value) throws SQLException;
+    protected abstract void setParametersUpdate(PreparedStatement stmUpdate, T entity) throws SQLException;
 
     protected abstract void setParametersSelect(PreparedStatement stmUpdate, E value) throws SQLException;
 
@@ -122,14 +122,14 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     }
 
   // ================= UPDATE ==========================================================
-    public Boolean update(E value) throws Exception {
+    public Boolean update(T entity) throws Exception {
     	Connection connection = null;
     	PreparedStatement stm = null;
     	try {
     		connection = getConnection();
     		stm = connection.prepareStatement(getQueryUpdate() + " WHERE "
     		+ getColumnName().columnName() + " = " + " ? ");
-    		setParametersUpdate(stm, value);
+    		setParametersUpdate(stm, entity);
     		if(stm.executeUpdate() > 0) {
     			return true;
     		}

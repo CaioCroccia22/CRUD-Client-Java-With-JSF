@@ -46,7 +46,7 @@ public class ClientTest {
 	}
 
 	@Test
-	public void buscarTest() throws Exception {
+	public void findTest() throws Exception {
 		clientDAO = new ClientDAO();
 
 		Client client = new Client();
@@ -71,13 +71,14 @@ public class ClientTest {
 	}
 
 	@Test
-	public void excluirTest() throws Exception {
+	public void deleteTest() throws Exception {
 		clientDAO = new ClientDAO();
 
 		Client client = new Client();
-		client.setCpf(323232323L);
+		client.setCpf(36466545L);
 		client.setName("Rodrigo Pires");
 		client.setAge(30);
+		// Here we can use @Beforeeach/@AfterEach but I prefer to change CPF value
 		client.setPhone(11888888888L);
 		client.setAddress("Rua Exemplo");
 		client.setNumber(300);
@@ -97,7 +98,7 @@ public class ClientTest {
 
 
 	@Test
-	public void atualizarTest() throws Exception {
+	public void updateTest() throws Exception {
 		clientDAO = new ClientDAO();
 
 		Client client = new Client();
@@ -116,8 +117,12 @@ public class ClientTest {
 		Assertions.assertNotNull(clientBD);
 		Assertions.assertEquals(client.getCpf(), clientBD.getCpf());
 		Assertions.assertEquals(client.getName(), clientBD.getName());
-
-		Boolean updated = clientDAO.update(clientBD.getCpf());
+		
+		
+		// We should create change client class from DB to update on database
+		clientBD.setName("Change Name");
+		
+		Boolean updated = clientDAO.update(clientBD);
 		Assertions.assertTrue(updated);
 
 		Boolean deleted = clientDAO.delete(786755765L);
