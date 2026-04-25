@@ -8,12 +8,7 @@ import br.com.ccroccia.dao.ClientDAO;
 import br.com.ccroccia.dao.IClientDao;
 import br.com.ccroccia.domain.Client;
 
-/**
- * Testes de integração do ClientDAO (executa no PostgreSQL).
- * Requer:
- *   - Banco "marketplace" criado em localhost:15432
- *   - schema.sql aplicado
- */
+
 public class ClientTest {
 
 

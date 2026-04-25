@@ -3,23 +3,37 @@ package br.com.ccroccia.dao.jdbc;
 import java.sql.*;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import io.github.cdimascio.dotenv.DotenvException;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
+
+/*In this class the manage of pools connections with standalone.xml file
+ * But I prefered to use Hiraki to know the repository */
 public class ConnectionFactory {
-	private static Connection connection;
+	
+	private static final HikariDataSource dataSource;
 	
 	private static final Dotenv dotenv = Dotenv.load();
+	static {
+		HikariConfig config = new HikariConfig();
+		config.setJdbcUrl(dotenv.get("DB_URL"));
+		config.setUsername(dotenv.get("DB_USER"));
+		config.setPassword(dotenv.get("DB_PASS"));
+		config.setMaximumPoolSize(10);
+		
+		dataSource = new HikariDataSource(config);
+	}
 	
-	private static final String url = dotenv.get("DB_URL");
-	
-	private static final String user = dotenv.get("DB_USER");
-	
-	private static final String password = dotenv.get("DB_PASS");
 	
 
 	private ConnectionFactory() {};
 	
-
+	/*
+	 * 
+	 * Hiraki make this logic internally
+	 * However its interisting to stay to know how it works
+	 * 
+	 * 
 	public static Connection getConnection() throws SQLException {
 		if(connection == null) {
 			connection = initConnection();
@@ -27,14 +41,12 @@ public class ConnectionFactory {
 			connection = initConnection();
 		}
 		return connection;
-	}
+	}*/ 
+	
 
-	private static Connection initConnection() {
+	public static Connection getConnection() {
 		try {
-			return DriverManager.getConnection(
-					url,
-					user, password
-					);
+			return dataSource.getConnection();
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
