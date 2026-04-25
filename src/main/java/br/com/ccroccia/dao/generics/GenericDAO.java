@@ -85,7 +85,9 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     				try {
     					Method method = entity.getClass().getMethod(setMethod, type);
     					setValueByType(entity, method, type, rs, columnName);
-    				} catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+    				}catch(KeyTypeNotFoundException e) {
+    		    		throw new Exception("Não possui notação de chave", e);
+    				}  catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
     			        throw new Exception("ERRO CONSULTANDO OBJETO ", e);
     			    }
 
@@ -116,7 +118,9 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     		return false;
     	} catch(SQLException e) {
 			throw new Exception("Erro ao excluir", e);
-		} finally {
+		}catch(KeyTypeNotFoundException e) {
+    		throw new Exception("Não possui notação de chave", e);
+		}  finally {
 			closeConnection(connection, stm, null);
 		}
     }
@@ -136,6 +140,8 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     		return false;
     	} catch(SQLException e) {
 			throw new Exception("Erro ao atualizar", e);
+    	} catch(KeyTypeNotFoundException e) {
+    		throw new Exception("Não possui notação de chave", e);
 		} finally {
 			closeConnection(connection, stm, null);
 		}
@@ -212,7 +218,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
         }
     }
 
-	private Column getColumnName() {
+	private Column getColumnName() throws KeyTypeNotFoundException{
 		Class<T> entity = getTypeClass();
 		Field[] fields = entity.getDeclaredFields();
 		for(Field f: fields) {
