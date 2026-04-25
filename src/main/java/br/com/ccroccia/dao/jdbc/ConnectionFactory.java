@@ -17,15 +17,13 @@ public class ConnectionFactory {
 	private static final String password = dotenv.get("DB_PASS");
 	
 
-	private ConnectionFactory(Connection connection) {
-
-	};
+	private ConnectionFactory() {};
 	
 
 	public static Connection getConnection() throws SQLException {
 		if(connection == null) {
 			connection = initConnection();
-		} else if(connection.isClosed() && connection != null) {
+		} else if(connection != null && connection.isClosed() ) {
 			connection = initConnection();
 		}
 		return connection;
