@@ -70,7 +70,7 @@ public class ClientDAO extends GenericDAO<Client, Long> implements IClientDao {
 		stm.setString(6, c.getCity());
 		stm.setString(7, c.getState());
 		stm.setObject(8, c.getAge(), Types.INTEGER);
-		stm.setLong(9, c.getCpf());
+		stm.setLong(9, c.getId());
 	}
 
 

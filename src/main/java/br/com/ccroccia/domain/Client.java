@@ -9,9 +9,10 @@ import br.com.ccroccia.dao.Persistent;
 public class Client implements Persistent{
 
 
+	@KeyType("getId")
 	@Column(columnName = "cd_client", method = "setId")
 	private Long id;
-	@KeyType("getCpf")
+	
 	@Column(columnName = "cd_cpf", method = "setCpf")
 	private Long cpf;
 	@Column(columnName = "nm_client", method = "setName")
