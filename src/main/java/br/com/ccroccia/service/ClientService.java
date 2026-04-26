@@ -22,9 +22,9 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public Client findByCPF(Long cpf) {
+	public Client findById(Long id) {
 		try {
-			Client client = clientDao.find(cpf);
+			Client client = clientDao.find(id);
 			return client;
 		} catch(Exception e) {
 				System.out.println("Erro ao localizar cliente");
@@ -33,9 +33,9 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public void delete(Long cpf) {
+	public void delete(Long id) {
 		try {
-			clientDao.delete(cpf);
+			clientDao.delete(id);
 		} catch(Exception e) {
 				System.out.println("Erro ao excluir cliente");
 		}

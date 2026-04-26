@@ -31,12 +31,12 @@ public class ClientTest {
 		Boolean registered = clientDAO.register(client);
 		Assertions.assertTrue(registered);
 
-		Client clientBD = clientDAO.find(121212121L);
+		Client clientBD = clientDAO.find(client.getId());
 		Assertions.assertNotNull(clientBD);
 		Assertions.assertEquals(client.getCpf(), clientBD.getCpf());
 		Assertions.assertEquals(client.getName(), clientBD.getName());
 
-		Boolean deleted = clientDAO.delete(client.getCpf());
+		Boolean deleted = clientDAO.delete(client.getId());
 		Assertions.assertTrue(deleted);
 	}
 
@@ -56,12 +56,12 @@ public class ClientTest {
 		Boolean registered = clientDAO.register(client);
 		Assertions.assertTrue(registered);
 
-		Client clientBD = clientDAO.find(323232323L);
+		Client clientBD = clientDAO.find(client.getId());
 		Assertions.assertNotNull(clientBD);
 		Assertions.assertEquals(client.getCpf(), clientBD.getCpf());
 		Assertions.assertEquals(client.getName(), clientBD.getName());
 
-		Boolean deleted = clientDAO.delete(323232323L);
+		Boolean deleted = clientDAO.delete(client.getId());
 		Assertions.assertTrue(deleted);
 	}
 
@@ -82,12 +82,12 @@ public class ClientTest {
 		Boolean registered = clientDAO.register(client);
 		Assertions.assertTrue(registered);
 
-		Client clientBD = clientDAO.find(323232323L);
+		Client clientBD = clientDAO.find(client.getId());
 		Assertions.assertNotNull(clientBD);
 		Assertions.assertEquals(client.getCpf(), clientBD.getCpf());
 		Assertions.assertEquals(client.getName(), clientBD.getName());
 
-		Boolean deleted = clientDAO.delete(323232323L);
+		Boolean deleted = clientDAO.delete(client.getId());
 		Assertions.assertTrue(deleted);
 	}
 
@@ -108,7 +108,7 @@ public class ClientTest {
 		Boolean registered = clientDAO.register(client);
 		Assertions.assertTrue(registered);
 
-		Client clientBD = clientDAO.find(786755765L);
+		Client clientBD = clientDAO.find(client.getId());
 		Assertions.assertNotNull(clientBD);
 		Assertions.assertEquals(client.getCpf(), clientBD.getCpf());
 		Assertions.assertEquals(client.getName(), clientBD.getName());
@@ -120,7 +120,7 @@ public class ClientTest {
 		Boolean updated = clientDAO.update(clientBD);
 		Assertions.assertTrue(updated);
 
-		Boolean deleted = clientDAO.delete(786755765L);
+		Boolean deleted = clientDAO.delete(client.getId());
 		Assertions.assertTrue(deleted);
 	}
 }

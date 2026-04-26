@@ -40,8 +40,8 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     /// =============REGISTER =================
     @Override
     public Boolean register(T entity) throws KeyTypeNotFoundException, Exception {
-    	Connection connection = null;
-    	PreparedStatement stm = null;
+    	Connection connection 	= null;
+    	PreparedStatement stm 	= null;
     	try {
     		connection = getConnection();
     		stm        = connection.prepareStatement(getQueryInsert(), Statement.RETURN_GENERATED_KEYS);
@@ -53,7 +53,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     					Persistent per = (Persistent) entity;
     					per.setId(rs.getLong(1));
     				}
-    			}
+    			}// rs is closed here because I put null
     			return true;
     		}
     	}catch(Exception e) {
@@ -86,7 +86,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     					Method method = entity.getClass().getMethod(setMethod, type);
     					setValueByType(entity, method, type, rs, columnName);
     				}catch(KeyTypeNotFoundException e) {
-    		    		throw new Exception("Não possui notação de chave", e);
+    		    		throw new Exception("Entidade " + entity.getClass() + " sem @KeyType");
     				}  catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
     			        throw new Exception("ERRO CONSULTANDO OBJETO ", e);
     			    }
@@ -95,7 +95,9 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     			}
     			return entity;
     		}
-    	} catch(Exception e) {
+    	} catch(KeyTypeNotFoundException e) {
+    		throw new Exception("Não possui notação de chave", e);
+		} catch(Exception e) {
     		throw new Exception("Erro ao se conectar com o banco ", e);
     	} finally {
 			closeConnection(connection, stm, null);
@@ -119,7 +121,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     	} catch(SQLException e) {
 			throw new Exception("Erro ao excluir", e);
 		}catch(KeyTypeNotFoundException e) {
-    		throw new Exception("Não possui notação de chave", e);
+    		throw new Exception("Entidade " + value.getClass() + " sem @KeyType", e);
 		}  finally {
 			closeConnection(connection, stm, null);
 		}
@@ -139,7 +141,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     		}
     		return false;
     	} catch(SQLException e) {
-			throw new Exception("Erro ao atualizar", e);
+			throw new Exception("Entidade " + entity.getClass() + " sem @KeyType");
     	} catch(KeyTypeNotFoundException e) {
     		throw new Exception("Não possui notação de chave", e);
 		} finally {

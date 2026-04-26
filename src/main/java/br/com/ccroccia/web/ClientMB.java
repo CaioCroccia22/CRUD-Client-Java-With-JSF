@@ -17,9 +17,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Named("clienteMB")
+@Named("clientMB")
 @ViewScoped
-public class ClienteMB implements Serializable {
+// We need Serializable here to save an initial state before an event from JSF
+public class ClientMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +54,7 @@ public class ClienteMB implements Serializable {
     }
 
     public void delete(Client c) {
-        clientService.delete(c.getCpf());
+        clientService.delete(c.getId());
         addInfo("Cliente excluído.");
         load();
     }

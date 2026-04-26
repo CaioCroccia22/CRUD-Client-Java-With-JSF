@@ -7,9 +7,9 @@ public interface IClientService {
 
 	boolean save(Client client) throws Exception;
 
-	Client findByCPF(Long cpf);
+	Client findById(Long id);
 
-	void delete(Long cpf);
+	void delete(Long id);
 
 	void update(Client client);
 

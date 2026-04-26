@@ -6,7 +6,7 @@ import java.sql.Types;
 
 import br.com.ccroccia.dao.generics.GenericDAO;
 import br.com.ccroccia.domain.Client;
-import br.com.ccroccia.exceptions.KeyTypeNotFoundException;
+
 
 public class ClientDAO extends GenericDAO<Client, Long> implements IClientDao {
 

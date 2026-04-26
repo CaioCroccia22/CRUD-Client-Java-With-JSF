@@ -1,6 +1,8 @@
 package br.com.ccroccia.dao;
 
-public interface Persistent {
+import java.io.Serializable;
+
+public interface Persistent extends Serializable{
 	public Long getId();
 
 	public void setId(Long id);
