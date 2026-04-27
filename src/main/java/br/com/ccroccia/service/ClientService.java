@@ -1,9 +1,8 @@
 package br.com.ccroccia.service;
 
 import br.com.ccroccia.dao.IClientDao;
-import br.com.ccroccia.dao.Persistent;
 import br.com.ccroccia.domain.Client;
-import br.com.ccroccia.exceptions.KeyTypeNotFoundException;
+
 
 public class ClientService implements IClientService {
 

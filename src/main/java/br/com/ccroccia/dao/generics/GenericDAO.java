@@ -54,12 +54,13 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     					per.setId(rs.getLong(1));
     				}
     			}// rs is closed here because I put null
+    			//Pelo JDBC spec (§14.1): "A ResultSet object is automatically closed when the Statement object that generated it is closed"
     			return true;
     		}
     	}catch(Exception e) {
     		throw new Exception("Erro Cadastrando Objeto", e);
     	}finally {
-    		closeConnection(connection, stm, null);
+    		closeConnection(connection, stm);
     	}
 		return false;
     }
@@ -84,16 +85,8 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     				String columnName = column.columnName();
     				String setMethod  = column.method();
     				Class<?> type = f.getType();
-    				try {
-    					Method method = entity.getClass().getMethod(setMethod, type);
-    					setValueByType(entity, method, type, rs, columnName);
-    				}catch(KeyTypeNotFoundException e) {
-    		    		throw new Exception("Entidade " + entity.getClass() + " sem @KeyType");
-    				}  catch(NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-    			        throw new Exception("ERRO CONSULTANDO OBJETO ", e);
-    			    }
-
-
+    				Method method = entity.getClass().getMethod(setMethod, type);
+    				setValueByType(entity, method, type, rs, columnName);
     			}
     			return entity;
     		}
@@ -102,7 +95,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
 		} catch(Exception e) {
     		throw new Exception("Erro ao se conectar com o banco ", e);
     	} finally {
-			closeConnection(connection, stm, null);
+			closeConnection(connection, stm);
 		}
 		return null;
 
@@ -125,7 +118,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
 		}catch(KeyTypeNotFoundException e) {
     		throw new Exception("Entidade " + value.getClass() + " sem @KeyType", e);
 		}  finally {
-			closeConnection(connection, stm, null);
+			closeConnection(connection, stm);
 		}
     }
 
@@ -143,11 +136,11 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     		}
     		return false;
     	} catch(SQLException e) {
-			throw new Exception("Entidade " + entity.getClass() + " sem @KeyType");
+			throw new Exception("Erro de Banco", e);
     	} catch(KeyTypeNotFoundException e) {
     		throw new Exception("Não possui notação de chave", e);
 		} finally {
-			closeConnection(connection, stm, null);
+			closeConnection(connection, stm);
 		}
     }
 
@@ -169,7 +162,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     	} catch(Exception e) {
     		throw new Exception("Erro ao se conectar com o banco ", e);
     	} finally {
-			closeConnection(connection, stm, null);
+			closeConnection(connection, stm);
 		}
     }
 
@@ -243,21 +236,17 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
 		return ConnectionFactory.getConnection();
 	}
 
-	private void closeConnection(Connection connection, PreparedStatement stm, ResultSet rs) throws SQLException {
-		try {
-			if(rs != null && !rs.isClosed()) {
-				rs.close();
-			}
-			if(stm != null && !stm.isClosed()) {
-				stm.close();
-			}
-			if(connection != null && !connection.isClosed()) {
-				connection.close();
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-
-
-	}
+	private void closeConnection(Connection connection, PreparedStatement stm) {
+      try {                                                                                       
+          if (stm != null && !stm.isClosed()) {
+              stm.close();                                                                        
+          }       
+          if (connection != null && !connection.isClosed()) {
+              connection.close();                                                                 
+          }
+      } catch (SQLException e) {                                                                  
+          // idealmente: logger.warn("Falha ao fechar recursos JDBC", e);
+          e.printStackTrace();                                                                    
+      }
+  } 
 }
