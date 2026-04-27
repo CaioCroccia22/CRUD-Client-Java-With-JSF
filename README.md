@@ -19,7 +19,7 @@
   http://localhost:8080/simple-webapp/
 
 ## Possible Problems
-- Widfly don't work with java 21+, I had to used Java 17
+- Widfly 27+ don't work with java 21+, I had to used Java 11
 - You should add to Eclipse, "Maven Dependencies" -> "Deployment Assembly"
 - PrimeFaces 14 without "Jakarta", you shouldn't use "javax" because it's about old Java EE version
 - You should add Facets (JavaServer Faces 2.3, Dynamic Web Module 5.0, Java 11) 
