@@ -11,7 +11,7 @@ import annotation.Table;
 public class ClientEntityTest {
 
 	@Test
-	public void deveCriarClienteComTodosOsCampos() {
+	public void createClientWithAllFields() {
 		Client client = new Client();
 		client.setCpf(12345678901L);
 		client.setName("Caio Croccia");
@@ -33,7 +33,7 @@ public class ClientEntityTest {
 	}
 
 	@Test
-	public void classeClientDeveTerAnotacaoTable() {
+	public void validateClassClientWithAnnotation() {
 		Table table = Client.class.getAnnotation(Table.class);
 		Assertions.assertNotNull(table, "Client deve estar anotada com @Table");
 		Assertions.assertEquals("Client", table.tableName());
