@@ -40,12 +40,12 @@ public class ClientEntityTest {
 	}
 
 	@Test
-	public void campoCpfDeveSerKeyType() throws Exception {
-		java.lang.reflect.Field cpf = Client.class.getDeclaredField("cpf");
-		KeyType key = cpf.getAnnotation(KeyType.class);
-		Column col = cpf.getAnnotation(Column.class);
-		Assertions.assertNotNull(key, "cpf deve estar anotado com @KeyType");
-		Assertions.assertNotNull(col, "cpf deve estar anotado com @Column");
-		Assertions.assertEquals("cd_cpf", col.columnName());
+	public void KeyType() throws Exception {
+		java.lang.reflect.Field id = Client.class.getDeclaredField("id");
+		KeyType key = id .getAnnotation(KeyType.class);
+		Column col = id .getAnnotation(Column.class);
+		Assertions.assertNotNull(key, "o id deve estar anotado com @KeyType");
+		Assertions.assertNotNull(col, "o id deve estar anotado com @Column");
+		Assertions.assertEquals("cd_client", col.columnName());
 	}
 }
