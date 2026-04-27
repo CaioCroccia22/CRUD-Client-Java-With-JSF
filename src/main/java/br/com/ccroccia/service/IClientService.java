@@ -1,17 +1,17 @@
 package br.com.ccroccia.service;
 
-import br.com.ccroccia.dao.Persistent;
+
 import br.com.ccroccia.domain.Client;
 
 public interface IClientService {
 
 	boolean save(Client client) throws Exception;
 
-	Client findById(Long id);
+	Client findById(Long id) throws Exception;
 
-	void delete(Long id);
+	boolean delete(Long id) throws Exception;
 
-	void update(Client client);
+	boolean update(Client client) throws Exception;
 
 
 }

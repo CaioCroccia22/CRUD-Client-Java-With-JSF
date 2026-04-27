@@ -79,6 +79,8 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
     			Field[] fields = entity.getClass().getDeclaredFields();
     			for(Field f:fields) {
     				Column column = f.getDeclaredAnnotation(Column.class);
+    				if (column == null) continue; // In the next feature I want
+    				// to create a method to throw a Exception when find this
     				String columnName = column.columnName();
     				String setMethod  = column.method();
     				Class<?> type = f.getType();
@@ -220,17 +222,16 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
         }
     }
 
-	private Column getColumnName() throws KeyTypeNotFoundException{
-		Class<T> entity = getTypeClass();
-		Field[] fields = entity.getDeclaredFields();
-		for(Field f: fields) {
-			if(f.getAnnotation(KeyType.class) != null) {
-				Column column = f.getAnnotation(Column.class);
-				return column;
-			}
-		}
-		return null;
-	}
+    private Column getColumnName() throws KeyTypeNotFoundException {
+        Class<T> entity = getTypeClass();                                                                              
+        for (Field f : entity.getDeclaredFields()) {
+            if (f.getAnnotation(KeyType.class) != null) {                                                              
+                return f.getAnnotation(Column.class);                                                                  
+            }
+        }                                                                                                              
+        throw new KeyTypeNotFoundException(
+            "Entidade " + entity.getName() + " sem @KeyType");
+    }  
 
 	private String getTableName() {
 		Class<T> entity = getTypeClass();

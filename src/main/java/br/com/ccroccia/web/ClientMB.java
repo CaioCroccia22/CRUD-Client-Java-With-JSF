@@ -50,13 +50,17 @@ public class ClientMB implements Serializable {
 
     public void edit(Client c) {
         this.client = c;
-        clientService.update(c);
     }
 
     public void delete(Client c) {
-        clientService.delete(c.getId());
-        addInfo("Cliente excluído.");
-        load();
+    	
+    	try {
+    		clientService.delete(c.getId());
+    		addInfo("Cliente excluído.");
+    		load();    		
+    	}catch (Exception e){
+    		addError(e.toString());
+    	}
     }
 
     public void clear() {

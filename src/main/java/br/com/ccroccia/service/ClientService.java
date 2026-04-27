@@ -16,39 +16,44 @@ public class ClientService implements IClientService {
 
 	@Override
 	public boolean save(Client client) throws Exception {
-		clientDao.register(client);
+		if(!clientDao.register(client)) {
+			return false;
+		}
+		
 		return true;
 
 	}
 
 	@Override
-	public Client findById(Long id) {
-		try {
-			Client client = clientDao.find(id);
-			return client;
-		} catch(Exception e) {
-				System.out.println("Erro ao localizar cliente");
+	public Client findById(Long id) throws Exception{
+		Client client = clientDao.find(id);
+		
+		if(client == null) {
+			return null;				
 		}
-		return null;
-	}
-
-	@Override
-	public void delete(Long id) {
-		try {
-			clientDao.delete(id);
-		} catch(Exception e) {
-				System.out.println("Erro ao excluir cliente");
-		}
+			
+		return client;
 		
 	}
 
 	@Override
-	public void update(Client c) {
-		try {
-			clientDao.update(c);			
-		} catch(Exception e) {
-			System.out.println("Erro ao atualizar cliente");
+	public boolean delete(Long id) throws Exception{
+			
+			if(!clientDao.delete(id)) {
+				return false;				
+			}
+				
+			return true;
+		
+	}
+
+	@Override
+	public boolean update(Client c) throws Exception{
+		if(!clientDao.update(c)) {
+			return false;				
 		}
+			
+		return true;
 	}
 
 }
