@@ -26,42 +26,42 @@
                          styleClass="ui-panelgrid-blank">
 
                 <p:outputLabel for="cpf" value="CPF:" />
-                <p:inputNumber id="cpf" value="#{clienteMB.client.cpf}"
+                <p:inputNumber id="cpf" value="#{clientMB.client.cpf}"
                                decimalPlaces="0" thousandSeparator=""
                                required="true" requiredMessage="Informe o CPF" />
 
                 <p:outputLabel for="nome" value="Nome:" />
-                <p:inputText id="nome" value="#{clienteMB.client.name}"
+                <p:inputText id="nome" value="#{clientMB.client.name}"
                              required="true" requiredMessage="Informe o nome" />
 
                 <p:outputLabel for="idade" value="Idade:" />
-                <p:inputNumber id="idade" value="#{clienteMB.client.age}"
+                <p:inputNumber id="idade" value="#{clientMB.client.age}"
                                decimalPlaces="0" />
 
                 <p:outputLabel for="telefone" value="Telefone:" />
-                <p:inputNumber id="telefone" value="#{clienteMB.client.phone}"
+                <p:inputNumber id="telefone" value="#{clientMB.client.phone}"
                                decimalPlaces="0" thousandSeparator="" />
 
                 <p:outputLabel for="endereco" value="Endereço:" />
-                <p:inputText id="endereco" value="#{clienteMB.client.address}" />
+                <p:inputText id="endereco" value="#{clientMB.client.address}" />
 
                 <p:outputLabel for="numero" value="Número:" />
-                <p:inputNumber id="numero" value="#{clienteMB.client.number}"
+                <p:inputNumber id="numero" value="#{clientMB.client.number}"
                                decimalPlaces="0" />
 
                 <p:outputLabel for="cidade" value="Cidade:" />
-                <p:inputText id="cidade" value="#{clienteMB.client.city}" />
+                <p:inputText id="cidade" value="#{clientMB.client.city}" />
 
                 <p:outputLabel for="estado" value="Estado:" />
-                <p:inputText id="estado" value="#{clienteMB.client.state}" maxlength="2" />
+                <p:inputText id="estado" value="#{clientMB.client.state}" maxlength="2" />
             </p:panelGrid>
 
             <f:facet name="footer">
                 <p:commandButton value="Salvar" icon="pi pi-check"
-                                 action="#{clienteMB.save}"
+                                 action="#{clientMB.save}"
                                  update="formCliente" />
                 <p:commandButton value="Limpar" icon="pi pi-times"
-                                 action="#{clienteMB.clear}"
+                                 action="#{clientMB.clear}"
                                  process="@this" update="formCliente"
                                  style="margin-left:8px;" />
             </f:facet>
@@ -69,7 +69,7 @@
 		
         <p:panel header="Clientes Cadastrados" style="margin-top:15px;">
             <p:dataTable id="tabelaClientes" var="cli"
-                         value="#{clienteMB.clients}"
+                         value="#{clientMB.clients}"
                          emptyMessage="Nenhum cliente cadastrado."
                          paginator="true" rows="10"
                          rowsPerPageTemplate="5,10,20">
