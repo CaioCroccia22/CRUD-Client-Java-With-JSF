@@ -40,7 +40,7 @@ public class ClientEntityTest {
 	}
 
 	@Test
-	public void KeyType() throws Exception {
+	public void validateKeyType() throws Exception {
 		java.lang.reflect.Field id = Client.class.getDeclaredField("id");
 		KeyType key = id .getAnnotation(KeyType.class);
 		Column col = id .getAnnotation(Column.class);
