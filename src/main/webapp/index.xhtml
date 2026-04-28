@@ -95,8 +95,19 @@
                 <p:column headerText="Cidade/UF">
                     <h:outputText value="#{cli.city}/#{cli.state}" />
                 </p:column>
-
-
+				<p:column headerText="Ações">
+			      <p:commandButton icon="pi pi-pencil"                                                                   
+			                       action="#{clientMB.edit(cli)}"                                                        
+			                       update="formCliente" />                                                               
+			      <p:commandButton icon="pi pi-trash"                                                                    
+			                       action="#{clientMB.delete(cli)}"                                                      
+			                       update="formCliente"            
+			                       style="margin-left:6px;">                                                             
+			          <p:confirm header="Confirmação"                                                                    
+			                     message="Excluir cliente?" 
+			                     icon="pi pi-exclamation-triangle"/>                                                     
+			      </p:commandButton>                                                                                     
+			   </p:column>
             </p:dataTable>
         </p:panel>
 
