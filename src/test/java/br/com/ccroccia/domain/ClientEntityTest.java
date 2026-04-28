@@ -3,9 +3,9 @@ package br.com.ccroccia.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import annotation.Column;
-import annotation.KeyType;
-import annotation.Table;
+import br.com.ccroccia.annotation.Column;
+import br.com.ccroccia.annotation.KeyType;
+import br.com.ccroccia.annotation.Table;
 
 
 public class ClientEntityTest {

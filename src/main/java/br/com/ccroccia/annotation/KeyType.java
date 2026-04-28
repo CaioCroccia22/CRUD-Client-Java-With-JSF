@@ -1,4 +1,4 @@
-package annotation;
+package br.com.ccroccia.annotation;
 
 import java.lang.annotation.*;
 

@@ -1,7 +1,7 @@
 package br.com.ccroccia.dao.generics;
 
 import br.com.ccroccia.dao.Persistent;
-import br.com.ccroccia.domain.Client;
+
 import br.com.ccroccia.exceptions.KeyTypeNotFoundException;
 
 import java.io.Serializable;

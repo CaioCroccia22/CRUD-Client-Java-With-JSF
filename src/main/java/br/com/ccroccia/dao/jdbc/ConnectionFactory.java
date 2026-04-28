@@ -22,6 +22,7 @@ public class ConnectionFactory {
 		config.setMaximumPoolSize(10);
 		
 		dataSource = new HikariDataSource(config);
+		dataSource.close();
 	}
 	
 	

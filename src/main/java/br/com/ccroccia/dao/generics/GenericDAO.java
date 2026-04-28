@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import annotation.*;
+import br.com.ccroccia.annotation.Column;
+import br.com.ccroccia.annotation.KeyType;
+import br.com.ccroccia.annotation.Table;
 import br.com.ccroccia.dao.Persistent;
 import br.com.ccroccia.dao.jdbc.ConnectionFactory;
 import br.com.ccroccia.exceptions.KeyTypeNotFoundException;
@@ -236,7 +238,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
 		return ConnectionFactory.getConnection();
 	}
 
-	private void closeConnection(Connection connection, PreparedStatement stm) {
+	private void closeConnection(Connection connection, PreparedStatement stm) throws Exception {
       try {                                                                                       
           if (stm != null && !stm.isClosed()) {
               stm.close();                                                                        
@@ -246,7 +248,7 @@ public abstract class GenericDAO<T extends Persistent, E extends Serializable> i
           }
       } catch (SQLException e) {                                                                  
           // idealmente: logger.warn("Falha ao fechar recursos JDBC", e);
-          e.printStackTrace();                                                                    
+    	  throw new Exception("Erro no banco: " + e);                                                                  
       }
   } 
 }

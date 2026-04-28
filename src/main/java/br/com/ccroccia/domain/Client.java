@@ -2,7 +2,9 @@ package br.com.ccroccia.domain;
 
 
 import annotation.*;
-
+import br.com.ccroccia.annotation.Column;
+import br.com.ccroccia.annotation.KeyType;
+import br.com.ccroccia.annotation.Table;
 import br.com.ccroccia.dao.Persistent;
 
 @Table(tableName = "Client")
